@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: achenlab30
+  labels:
+    app: achenlab30
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: achenlab30web
+  template:
+    metadata:
+      labels:
+        app: achenlab30web
+    spec:
+      containers:
+      - name: nginx
+        image: alexchen2015/lab30:1.0.0
+        imagePullPolicy: Always 
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+    name: lab30web 
+spec: 
+   selector: 
+     app: achenlab30web
+   type: NodePort
+   ports: 
+        - protocol: TCP 
+          port: 80 
+          targetPort: 80 
+
